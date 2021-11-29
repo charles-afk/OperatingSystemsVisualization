@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=SSTF
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=queue\ head
+comment2.target=int[]\ SSTF(int[],\ int)
+comment3.params=currentVal
+comment3.target=int[]\ SSTFdiff(int)
+comment4.params=varDiff
+comment4.target=int\ findMin(int[])
+comment5.params=q\ h
+comment5.target=void\ writeToFile(int[],\ int)
+numComments=6

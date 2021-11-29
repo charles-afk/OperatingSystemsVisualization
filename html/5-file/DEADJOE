@@ -1,0 +1,22 @@
+
+*** These modified files were found in JOE when it aborted on Thu Apr 15 20:06:01 2021
+*** JOE was aborted because the terminal closed
+
+*** File '(Unnamed)'
+mc-rw-4.py
+output.txt
+input.txt
+input.txt
+output.txt
+input.txt
+input.txt
+output.txt
+input.txt
+input.txt
+output.txt
+
+*** File '* Startup Log *'
+Processing '/etc/joe/jpicorc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/jpicorc

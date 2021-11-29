@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<title>Page Replacement Algorithms Animation Slideshow</title>
+<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+        <style>
+            gantt th {
+                background: linear-gradient(WhiteSmoke, lightgray);
+                text-align: left;
+                border: 1px solid black;
+                height: 400 px;
+            }
+            gantt td {
+                border: 1px solid black;
+                border-bottom: 0;
+                height: 20px;
+                text-align: left;
+            }
+            body {
+                background-color: #e8c717;
+            }
+            #title {
+                font-family: 'Orbitron', sans-serif;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+ 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+<style type="text/css">
+#slideshow {
+  margin: 50px auto;
+  position: relative;
+  width: 900px;
+  height: 450px;
+  padding: 10px;
+}
+#slideshow > div {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+}
+#slideshow > div > img {
+  width: 100%;
+}
+#button {
+  text-align: center;
+}
+</style>
+
+</head>
+<body>
+        <nav class="navbar navbar-expand-sm bg-info navbar-dark">
+            <a class="navbar-brand" href="../index.html">OS Visualizations</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          
+            <ul class="navbar-nav mr-left">
+              <li class="nav-item">
+                <a class="nav-link" href="#">About / FAQ</a>
+              </li>
+             </ul>
+          
+             <ul class = "navbar-nav mr-right"> 
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Page Replacement</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../4-memory/index.html">Memory Allocation</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../1-cpu/index.html">CPU Scheduling</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../3-disk/index.html">Disk Scheduling</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../5-file/index.html">File Allocation</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="../6-address/index.html">Address Binding</a>
+                </li>
+             </ul>
+           </div>
+          </nav>
+
+        <br>
+        <div class="d-flex align-items-center justify-content-center">
+            <h1 style="color:blue;">Page Replacement Algorithms</h1>
+        </div>
+
+
+        <form method="POST" action="../files/random.php">
+          <div class="d-flex align-items-center justify-content-center">
+              <input type="text" name="AlgoID" value="2">
+              <input class="btn btn-primary" type="submit" value="Random">
+          </div>
+      </form>
+
+
+
+<div class="d-flex align-items-center justify-content-center">
+           
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+            <form id="preType">
+                
+            </form>
+        </div><br>
+
+
+        
+        
+
+
+
+<div class="container">
+   <div class="table-responsive">
+    <h1 align="center">Preload Input from File on Server</h1>
+    <br />
+    <div align="center">
+     <button type="button" name="load_data" id="load_data" class="btn btn-info">Load Data</button>
+    </div>
+    <br />
+    <div id="input_table">
+    </div>
+   </div>
+  </div>
+  <script>
+$(document).ready(function(){
+ $('#load_data').click(function(){
+  $.ajax({
+   url:"PageReplacementInput.txt",
+   dataType:"text",
+   success:function(data)
+   {
+    var pagereference_data = data.split(/\r?\n|\r/);
+    var table_data = '<table class="table table-bordered table-striped">';
+    for(var count = 0; count<pagereference_data.length; count++)
+    {
+     var cell_data = pagereference_data[count].split(",");
+     table_data += '<tr>';
+     for(var cell_count=0; cell_count<cell_data.length; cell_count++)
+     {
+      if(count === 0)
+      {
+       table_data += '<th>'+cell_data[cell_count]+'</th>';
+      }
+      else
+      {
+       table_data += '<td>'+cell_data[cell_count]+'</td>';
+      }
+     }
+     table_data += '</tr>';
+    }
+    table_data += '</table>';
+    $('#input_table').html(table_data);
+   }
+  });
+ });
+ 
+});
+</script>
+</div>
+
+        <div class="container">
+            
+
+
+       <br>
+
+        
+        
+
+ 
+
+
+        
+
+        
+    </body>
+
+
+
+
+<body>
+<div class="container">
+  <h2>Select the Algorithm:</h2>
+    <div class="d-flex align-items-center justify-content-center">
+            <form id="schedule">
+                <input type="radio" class="btn-check" name="schedule" value="FIFO" id="option1" autocomplete="off">
+                    <label class="btn btn-info" for="option1" onclick="return StartImage()">First In First Out</label>
+                <input type="radio" class="btn-check" name="schedule" value="LRU" id="option2" autocomplete="off">
+                    <label class="btn btn-secondary" for="option2" onclick="return StartImageLRU()">Least Recently Used</label>
+                <input type="radio" class="btn-check" name="schedule" value="Opt" id="option3" autocomplete="off">
+                    <label class="btn btn-danger" for="option3" onclick="return StartImageOPT()">Optimal</label>
+                <input type="radio" class="btn-check" name="schedule" value="LFU" id="option4" autocomplete="off">
+                    <label class="btn btn-warning" for="option4" onclick="return StartImageLFU()">Least Frequently Used</label>
+				<input type="radio" class="btn-check" name="schedule" value="MFU" id="option5" autocomplete="off">
+                   <label class="btn btn-light" for="option5" onclick="return StartImageMFU()">Most Frequently Used</label>
+				
+            </form>
+        </div>
+            <div class="d-flex align-items-center justify-content-center" id="timeSlice">
+                
+            </div>
+  
+
+</div> 
+
+
+<div>  
+   
+</div>
+
+<div class="container">
+  <h2>CONTROL PANEL:</h2>
+<a href="#" class="btn btn-info" role="button" onclick="return StartImage()">START</a>
+<a href="#" class="btn btn-info" role="button" onclick="return previousImage()">BACK</a>
+<a href="#" class="btn btn-info" role="button" onclick="return setTimer()">PLAY/PAUSE</a>
+<a href="#" class="btn btn-info" role="button" onclick="return nextImage()">NEXT</a>
+<a href="#" class="btn btn-info" role="button" onclick="return EndImage()">END</a>
+</div>
+
+
+<div class="container">
+
+ 
+
+</div>
+
+      
+</div>
+
+<div id="slideshow">
+  <div>
+     <img name="slide" id="imgSlideshow"  src="http://cs.newpaltz.edu/p/s21-06/s21-v2/PageReplacement3/BeforeTable.PNG">
+  </div>
+</div>
+<div class="container">
+  
+</div>
+</body>
+</html>
+
+
+
+<script language="javascript" type="text/javascript">
+var imgNumber =0;
+var path = [
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO1.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO2.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO3.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO4.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO5.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO6.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO7.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO8.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO9.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO10.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO1.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO2.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO3.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO4.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO5.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/LRU6.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/LRU7.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/LRU8.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/LRU9.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/LRU10.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO1.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO2.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO3.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO4.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO5.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/OPT6.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/OPT7.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/OPT8.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/OPT9.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/OPT10.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO1.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO2.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO3.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO4.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO5.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/OPT6.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/OPT7.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/LFU8.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/LFU9.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/LFU10.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO1.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO2.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/FIFO3.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/MFU4.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/MFU5.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/MFU6.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/MFU7.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/MFU8.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/MFU9.PNG",
+  "http://cs.newpaltz.edu/p/s21-06/s21-v4/2-replace/MFU10.PNG",
+  
+    
+];
+var numberOfImg = path.length;
+var timer = null;
+
+function slide() {
+  imgNumber = (imgNumber + 1) % path.length;
+  console.log(imgNumber);
+  document.getElementById("imgSlideshow").src = path[imgNumber];
+  changeCounter(imgNumber + 1, numberOfImg);
+}
+
+function setTimer() {
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  } else {
+    timer = setInterval(slide, 2000);
+  }
+  return false;
+}
+
+function StartImage() {
+  
+  if (imgNumber >39) {
+    imgNumber = 40 ;
+  }
+  else if (imgNumber >29) {
+    imgNumber = 30 ;
+  }
+  else if (imgNumber >19) {
+    imgNumber = 20 ;
+  }
+  else if (imgNumber >9) {
+    imgNumber = 10 ;
+  }
+   else  {
+    imgNumber = 0 ;
+  }
+  document.getElementById("imgSlideshow").src = path[imgNumber];
+  changeCounter(imgNumber + 1, numberOfImg);
+  return false;
+}
+function StartImageLRU() {
+  imgNumber = 10;
+  if (imgNumber < 0) {
+    imgNumber = numberOfImg ;
+  }
+  document.getElementById("imgSlideshow").src = path[imgNumber];
+  changeCounter(imgNumber + 1, numberOfImg);
+  return false;
+}
+
+function StartImageOPT() {
+  imgNumber = 20;
+  if (imgNumber < 0) {
+    imgNumber = numberOfImg ;
+  }
+  document.getElementById("imgSlideshow").src = path[imgNumber];
+  changeCounter(imgNumber + 1, numberOfImg);
+  return false;
+}
+function StartImageLFU() {
+  imgNumber = 30;
+  if (imgNumber < 0) {
+    imgNumber = numberOfImg ;
+  }
+  document.getElementById("imgSlideshow").src = path[imgNumber];
+  changeCounter(imgNumber + 1, numberOfImg);
+  return false;
+}
+function StartImageMFU() {
+  imgNumber = 40;
+  if (imgNumber < 0) {
+    imgNumber = numberOfImg ;
+  }
+  document.getElementById("imgSlideshow").src = path[imgNumber];
+  changeCounter(imgNumber + 1, numberOfImg);
+  return false;
+}
+function previousImage() {
+  --imgNumber;
+ if (imgNumber == 39)
+ {
+    imgNumber = 49; 
+}
+ else if (imgNumber ==29) 
+ {
+    imgNumber = 39;
+  }
+  else if (imgNumber == 19) 
+  {
+    imgNumber = 29;
+  }
+  else if (imgNumber == 9)
+  {
+    imgNumber = 19;
+  }
+  else if (imgNumber < 0) 
+  {
+    imgNumber = 9;
+  }
+  
+  
+  document.getElementById("imgSlideshow").src = path[imgNumber];
+  changeCounter(imgNumber + 1, numberOfImg);
+  return false;
+}
+
+function nextImage() {
+  ++imgNumber;
+  if (imgNumber ==10)
+  {
+    imgNumber = 0;
+  }
+  else if (imgNumber ==20)
+  {
+    imgNumber = 10;
+  }
+    else if (imgNumber ==30)
+    {
+    imgNumber = 20;
+    }
+    else if (imgNumber ==40)
+    {
+    imgNumber = 30;
+    }
+    else if (imgNumber >49) {
+    imgNumber = 40;
+  }
+  document.getElementById("imgSlideshow").src = path[imgNumber];
+  changeCounter(imgNumber + 1, numberOfImg);
+  return false;
+}
+
+function EndImage() {
+  imgNumber;
+  
+  if (imgNumber < 10) 
+  {
+    imgNumber = 9;
+  }
+  else if (imgNumber < 20)
+  {
+    imgNumber = 19;   
+  }
+  else if (imgNumber < 30)
+  {
+    imgNumber = 29;   
+  }
+  else if (imgNumber < 40)
+  {
+    imgNumber = 39;   
+  }
+  else if (imgNumber < 50)
+  {
+    imgNumber = 49;   
+  }
+  document.getElementById("imgSlideshow").src = path[imgNumber];
+  changeCounter(imgNumber + 1, numberOfImg);
+  return false;
+}
+
+
+</script>

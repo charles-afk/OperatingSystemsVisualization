@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=CSCAN
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=queue\ head
+comment2.target=int[]\ CSCAN(int[],\ int)
+comment3.params=q\ h
+comment3.target=void\ writeToFile(int[],\ int)
+numComments=4
